@@ -1,40 +1,32 @@
 import { Grid } from "@mantine/core";
 import React, { useContext } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { API_KEY } from "../constants";
-import axios from "axios";
+// import { useState } from "react";
+// import { useEffect } from "react";
+// import { API_KEY } from "../constants";
+// import axios from "axios";
 import NewsCard from "./NewsCard";
 import ButtonUI from "../UI/ButtonUI";
 import { HandlingContext } from "../../App";
 
 const Cards = () => {
-  const { sortby, searchInput } = useContext(HandlingContext);
-  const [news, setNews] = useState([]);
+  const { searchInput, news } = useContext(HandlingContext);
 
-  useEffect(() => {
-    axios
-      .get(
-        `https://newsapi.org/v2/everything?q=${searchInput}&from=2022-08-03&pageSize=20&sortBy=${sortby}&apiKey=${API_KEY}`
-      )
-      .then((res) => {
-        setNews(res.data.articles);
-      })
-      .catch((error) => console.log(error));
-  }, [sortby, searchInput]);
+  const moreNews = () => {};
 
   return (
     <>
       <Grid sx={{ padding: "40px" }}>
-        {news.map((card) => {
+        {news.map((card, index) => {
           return (
-            <Grid.Col md={6} lg={3}>
+            <Grid.Col key={index} md={6} lg={3}>
               <NewsCard data={card} />
             </Grid.Col>
           );
         })}
       </Grid>
-      {searchInput !== "" && <ButtonUI placeholder="LOAD MORE" />}
+      {searchInput !== "" && (
+        <ButtonUI onClick={moreNews} placeholder="LOAD MORE" />
+      )}
     </>
   );
 };

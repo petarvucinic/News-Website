@@ -1,5 +1,4 @@
 import { Select } from "@mantine/core";
-
 const data = [
   { value: "popularity", label: "Popularity" },
   { value: "relevance", label: "Relevance" },
