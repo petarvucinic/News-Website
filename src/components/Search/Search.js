@@ -5,8 +5,7 @@ import Sortby from "../MultiSelect/Sortby";
 import { HandlingContext } from "../../App";
 import ButtonUI from "../UI/ButtonUI";
 const Search = () => {
-  const { setSerachInput, setSortby, sortby, handleClickSearch } =
-    useContext(HandlingContext);
+  const { setSerachInput, handleClickSearch } = useContext(HandlingContext);
 
   const handleSearch = (e) => {
     setSerachInput(e.target.value);
@@ -30,8 +29,14 @@ const Search = () => {
         />
         <ButtonUI onClick={handleClickSearch} placeholder="Search" />
       </div>
+      {/* <div style={{ marginRight: "50px" }}>
+        <DatePicker
+          onChange={(e) => dataPickerHandler(e)}
+          placeholder="Pick date"
+        />
+      </div> */}
       <div style={{ marginRight: "50px" }}>
-        <Sortby sortby={sortby} setSortby={setSortby} />
+        <Sortby />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { Grid } from "@mantine/core";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 // import { useState } from "react";
 // import { useEffect } from "react";
 // import { API_KEY } from "../constants";
@@ -9,9 +9,15 @@ import ButtonUI from "../UI/ButtonUI";
 import { HandlingContext } from "../../App";
 
 const Cards = () => {
-  const { searchInput, news } = useContext(HandlingContext);
+  const { news, setFetchNumber, handleClickSearch } =
+    useContext(HandlingContext);
 
-  const moreNews = () => {};
+  const moreNews = () => {
+    setFetchNumber((prevState) => prevState + 1);
+    handleClickSearch();
+  };
+
+  useEffect(() => handleClickSearch(), []);
 
   return (
     <>
@@ -24,8 +30,10 @@ const Cards = () => {
           );
         })}
       </Grid>
-      {searchInput !== "" && (
+      {news.length !== 0 ? (
         <ButtonUI onClick={moreNews} placeholder="LOAD MORE" />
+      ) : (
+        ""
       )}
     </>
   );
