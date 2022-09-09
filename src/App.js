@@ -15,7 +15,7 @@ function App() {
   const [searchInput, setSerachInput] = useState("a");
   const [news, setNews] = useState([]);
   const [fetchNumber, setFetchNumber] = useState(20);
-  const [datePicker, setDatePicker] = useState(null);
+  const [datePicker, setDatePicker] = useState("");
 
   const handleClickSearch = () => {
     axios

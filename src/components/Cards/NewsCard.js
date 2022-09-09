@@ -16,7 +16,7 @@ const NewsCard = ({ data }) => {
       p="lg"
       radius="md"
       withBorder
-      sx={{ height: "450px"}}
+      sx={{ height: "450px", backgroundColor : "#faf8f8"}}
     >
       <Card.Section>
         <Image src={data.urlToImage} height={160} alt="Norway" />
@@ -35,11 +35,13 @@ const NewsCard = ({ data }) => {
           : data.description}
       </Text>
 
+
       <Button
         sx={{  width: "100%"}}
         variant="light"
         color="blue"
         fullWidth
+        withBorder
         mt="md"
         radius="md"
         onClick={() =>
@@ -49,6 +51,7 @@ const NewsCard = ({ data }) => {
               author: data.author,
               title: data.title,
               description: data.description,
+              publishedAt: data.publishedAt
             },
           })
         }
