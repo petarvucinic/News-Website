@@ -1,26 +1,31 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import { Grid, Image } from "@mantine/core";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Image } from "@mantine/core";
 import classes from "./Articles.module.css";
+import ButtonUI from "../UI/ButtonUI";
 
 function Articles() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const homePageNav = () => {
+    navigate("/");
+  };
 
   return (
-    // <Image
-    //   src={location.state.image}
-    //   height={160}
-    //   alt="Norway"
-    // />
-    // <Grid>
-    //   <Grid.Col span={5} style={{  }}>
-    //     <Image src={location.state.image} />
-    //   </Grid.Col>
-    //   <Grid.Col span={3}>{location.state.description}</Grid.Col>
-    // </Grid>
-
     <div className={classes.container}>
-      <Image className={classes.images} src={location.state.image}></Image>
+      <div className={classes.title}>
+        <h1>{location.state.title}</h1>
+      </div>
+      <div className={classes.images}>
+        <Image src={location.state.image}></Image>
+      </div>
+      <div className={classes.paragraph}>
+        <p>{location.state.description}</p>
+      </div>
+      <div className={classes.btn}>
+        <ButtonUI placeholder="HOME PAGE" onClick={homePageNav} />
+      </div>
     </div>
   );
 }

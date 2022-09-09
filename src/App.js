@@ -15,11 +15,12 @@ function App() {
   const [searchInput, setSerachInput] = useState("a");
   const [news, setNews] = useState([]);
   const [fetchNumber, setFetchNumber] = useState(20);
+  const [datePicker, setDatePicker] = useState(null);
 
   const handleClickSearch = () => {
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=${searchInput}&pageSize=${fetchNumber}&sortBy=${sortby}&apiKey=${API_KEY}`
+        `https://newsapi.org/v2/everything?q=${searchInput}&from=${datePicker}&pageSize=${fetchNumber}&sortBy=${sortby}&apiKey=${API_KEY}`
       )
       .then((res) => {
         setNews(res.data.articles);
@@ -27,7 +28,8 @@ function App() {
       })
       .catch((error) => console.log(error));
   };
-  
+
+  console.log(datePicker)
 
   return (
     <HandlingContext.Provider
@@ -41,6 +43,7 @@ function App() {
         setNews,
         fetchNumber,
         setFetchNumber,
+        setDatePicker,
       }}
     >
       <Routes>
@@ -57,8 +60,6 @@ function App() {
           <Route index element={<Articles />} />
         </Route>
       </Routes>
-
-
     </HandlingContext.Provider>
   );
 }

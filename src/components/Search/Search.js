@@ -1,15 +1,29 @@
 import React, { useContext } from "react";
-
+import { DatePicker } from "@mantine/dates";
 import { Input } from "@mantine/core";
 import Sortby from "../MultiSelect/Sortby";
 import { HandlingContext } from "../../App";
 import ButtonUI from "../UI/ButtonUI";
 const Search = () => {
-  const { setSerachInput, handleClickSearch } = useContext(HandlingContext);
+  const { setSerachInput, handleClickSearch, setDatePicker } =
+    useContext(HandlingContext);
+
+  function convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
 
   const handleSearch = (e) => {
     setSerachInput(e.target.value);
   };
+
+  const datePickerHandler = (e) => {
+    setDatePicker(convert(e));
+  };
+
+  
 
   return (
     <div
@@ -29,14 +43,15 @@ const Search = () => {
         />
         <ButtonUI onClick={handleClickSearch} placeholder="Search" />
       </div>
-      {/* <div style={{ marginRight: "50px" }}>
-        <DatePicker
-          onChange={(e) => dataPickerHandler(e)}
-          placeholder="Pick date"
-        />
-      </div> */}
+
       <div style={{ marginRight: "50px" }}>
         <Sortby />
+      </div>
+      <div style={{ marginRigth: "50px" }}>
+        <DatePicker
+          onChange={(e) => datePickerHandler(e)}
+          placeholder="Pick date"
+        ></DatePicker>
       </div>
     </div>
   );
