@@ -4,6 +4,7 @@ import { Input } from "@mantine/core";
 import Sortby from "../MultiSelect/Sortby";
 import { HandlingContext } from "../../App";
 import ButtonUI from "../UI/ButtonUI";
+import classes from "./Search.module.css";
 const Search = () => {
   const { setSerachInput, handleClickSearch, setDatePicker } =
     useContext(HandlingContext);
@@ -23,31 +24,21 @@ const Search = () => {
     setDatePicker(convert(e));
   };
 
-  
-
   return (
-    <div
-      style={{
-        display: "flex",
-        width: "100%",
-        minHeight: "250px",
-        marginTop: "5%",
-        justifyContent: "space-evenly",
-      }}
-    >
-      <div style={{ display: "flex", width: "70%", marginLeft: "150px" }}>
+    <div className={classes.container}>
+      <div className={classes.subContainer}>
         <Input
           onChange={(e) => handleSearch(e)}
-          sx={{ width: "30%" }}
+          sx={{ width: "50%" }}
           placeholder="Search news"
         />
         <ButtonUI onClick={handleClickSearch} placeholder="Search" />
       </div>
 
-      <div style={{ marginRight: "50px" }}>
+      <div style={{ marginRight: "50px", width: "30%" }}>
         <Sortby />
       </div>
-      <div style={{ marginRigth: "50px" }}>
+      <div style={{ marginRight: "50px", width: "30%" }}>
         <DatePicker
           onChange={(e) => datePickerHandler(e)}
           placeholder="Pick date"
